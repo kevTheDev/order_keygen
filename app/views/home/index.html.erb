@@ -68,7 +68,7 @@
     
     <div class="accordion" id="accordion">      
       
-      <% if @products.blank? %>
+      <% if @productsnh.blank? %>
       
         <div class="accordion-group">
           <div class="accordion-heading">
@@ -78,7 +78,7 @@
       
       <% else %>
       
-        <%  @products.each_with_index do |product, index| %>
+        <%  @productsnh.each_with_index do |product, index| %>
           <div class="accordion-group">
             <div class="accordion-heading">
               
