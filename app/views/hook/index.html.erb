@@ -1,0 +1,51 @@
+<div id="webhooks">
+  <h2>Webhook events</h2>
+
+  <% if @webhook_events.blank? %>  
+
+    <em class="note">There are no webhook events.</em>
+
+  <% else %>
+
+    <ul>
+    <% @webhook_events.each do |webhook_event| %>
+      <li>
+        <div class="order box">
+          <div class="wrapper">
+            <strong><%=  webhook_event.event_type %></strong>
+            <span><%= webhook_event.product.shopify_id %></span>
+            <span><%= webhook_event.created_at %></span>
+            
+          </div>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+
+  <% end %>
+</div>
+
+<div id="products">
+  <h2>Products</h2>
+
+  <% if @products.blank? %>  
+
+    <em class="note">There are no products.</em>
+
+  <% else %>
+
+    <ul>
+    <% @products.each do |product| %>
+      <li>
+        <div class="order box">
+          <div class="wrapper">
+            <strong><%=  product.name %></strong>
+            <span class="price"><%= product.shopify_id %></span>
+          </div>
+        </div>
+      </li>
+    <% end %>
+    </ul>
+
+  <% end %>
+</div>
