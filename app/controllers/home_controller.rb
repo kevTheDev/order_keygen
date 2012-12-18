@@ -112,8 +112,8 @@ puts "\nOutput Text:\n#{clear_text}\n\n"
 @cipher = cipher_text
 @clrtext = clear_text
 
-@licensekeyorder.note = cipher_text
-@licensekeyorder.save
+#@licensekeyorder.note = cipher_text
+#@licensekeyorder.save
 
 
   end
