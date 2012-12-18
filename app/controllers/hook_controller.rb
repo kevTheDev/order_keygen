@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HookController < ApplicationController
   
   around_filter :shopify_session, :except => 'welcome'
   
