@@ -3,6 +3,7 @@ Licensesync::Application.routes.draw do
     
   match 'welcome' => 'home#welcome'
   match 'design' => 'home#design'
+  match 'hook' => 'hook#index'
 
   controller :sessions do
     get 'login' => :new
