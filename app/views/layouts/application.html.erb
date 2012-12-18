@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Shopify Demo App</title>
+  <title>App</title>
   <%= stylesheet_link_tag 'application' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -33,14 +33,11 @@
           <span class="icon-bar"></span>
         </a>
         
-        <%= link_to 'Shopify Demo App', '/', :class => 'brand' %>
+        <%= link_to 'License App', '/', :class => 'brand' %>
         
         <% if shop_session %>
           <div class="nav-collapse">
-            <ul class="nav">
-              <li class='<%= active_nav_class('home', 'index') %>'><%= link_to 'Where to Start', '/' %></li>
-              <li class='<%= active_nav_class('home', 'design') %>'><%= link_to 'Bootstrap Info', '/design' %></li>
-            </ul>
+           
           </div>
           
           <ul class="nav pull-right">
@@ -68,7 +65,7 @@
     </div>
     
     <footer>
-      <p>A Shopify app by (company name here)</p>
+      <p>A Shopify app by Nomadichouse</p>
     </footer>
     
   </div> <!-- /container -->
