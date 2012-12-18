@@ -41,7 +41,9 @@ require 'openssl'
 # used to encrypt the real message data
 # which would be 'yourpass' in snippet http://www.bigbold.com/snippets/posts/show/576
 
-secret = @licensekeyorder.billing_address.name + @licensekeyorder.email + @licensekeyorder.created_at
+#secret = @licensekeyorder.billing_address.name + @licensekeyorder.email + @licensekeyorder.created_at
+
+secret = 'test'
 
 require 'digest/sha1'
 require "base64"
