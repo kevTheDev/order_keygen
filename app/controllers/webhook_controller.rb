@@ -1,6 +1,6 @@
 class WebHookController < ApplicationController
 
-def product_new
+    def product_new
       data = ActiveSupport::JSON.decode(request.body.read)
       shopify_id = data["id"]
 
@@ -9,20 +9,6 @@ def product_new
       head :ok
     end
 
-    private
-
-    def connect_to_store
-
-      shop_url = request.headers['HTTP_X_SHOPIFY_SHOP_DOMAIN']
-      shop_url = ("http://" + shop_url)
-
-      @s = Shop.find_by_url(shop_url)
-
-      session = ShopifyAPI::Session.new(@s.url, @s.access_token)
-      session.valid?
-      ShopifyAPI::Base.activate_session(session)
-
-    end
  
 end
 
