@@ -30,7 +30,7 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
     # get latest 5 orders
     @orders   = ShopifyAPI::Order.find(:all, :params => {:limit => 10, :order => "created_at DESC" })
 
-#@licensekeyorder = ShopifyAPI::Order.find(150909790) 
+@licensekeyorder = ShopifyAPI::Order.find(150854840) 
 
 @shopid = ShopifyAPI::Shop.current
 
@@ -41,9 +41,7 @@ require 'openssl'
 # used to encrypt the real message data
 # which would be 'yourpass' in snippet http://www.bigbold.com/snippets/posts/show/576
 
-#secret = @licensekeyorder.billing_address.name + @licensekeyorder.email + @licensekeyorder.created_at
-
-secret = 'test'
+secret = @licensekeyorder.billing_address.name + @licensekeyorder.email + @licensekeyorder.created_at
 
 require 'digest/sha1'
 require "base64"
@@ -112,8 +110,8 @@ puts "\nOutput Text:\n#{clear_text}\n\n"
 @cipher = cipher_text
 @clrtext = clear_text
 
-#@licensekeyorder.note = cipher_text
-#@licensekeyorder.save
+@licensekeyorder.note = cipher_text
+@licensekeyorder.save
 
 
   end
