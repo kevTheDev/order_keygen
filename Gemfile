@@ -21,7 +21,7 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   # To use debugger
-gem 'debugger'
+# gem 'debugger'
 
   gem 'uglifier', '>= 1.0.3'
 
