@@ -1,6 +1,6 @@
 class WebhookController < ApplicationController
 
-  before_filter :verify_webhook, :except => 'verify_webhook'
+  before_filter :verify_webhook, :except => [:verify_webhook, :product_new]
 
   def product_new
     data = ActiveSupport::JSON.decode(request.body.read)
