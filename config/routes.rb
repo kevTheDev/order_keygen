@@ -13,7 +13,7 @@ Licensesync::Application.routes.draw do
     delete 'logout' => :destroy
   end
 
-    match 'webhooks/products/create' => 'webhook#product_create'
+    match 'webhooks/products/create' => 'webhook#product_new'
   match 'webhooks/products/update' => 'webhook#product_updated'
   match 'webhooks/products/delete' => 'webhook#product_deleted'
 
