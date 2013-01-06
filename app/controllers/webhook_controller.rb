@@ -2,7 +2,7 @@ class WebHookController < ApplicationController
 
   before_filter :verify_webhook, :except => 'verify_webhook'
 
-  def product_new
+  def product_create
     data = ActiveSupport::JSON.decode(request.body.read)
     if Product.where('shopify_id = ?', data["id"]).first.exists?
       event = WebhookEvent.new(:event_type => "product new")
