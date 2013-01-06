@@ -40,10 +40,10 @@ class HookController < ApplicationController
   end
   
   def init_webhooks
-    topics = ["products/create", "products/update", "products/delete"]
-    
-    topics.each do |topic|
-      webhook = ShopifyAPI::Webhook.create(:format => "json", :topic => topic, :address => "http://polar-badlands-9376.herokuapp.com/webhooks/#{topic}")
+   # topics = ["products/create", "products/update", "products/delete"]
+    webhook = ShopifyAPI::Webhook.create(format: "json", topic: "products/create", address: "http://polar-badlands-9376.herokuapp.com/webhooks/products/create")
+    #topics.each do |topic|
+     # webhook = ShopifyAPI::Webhook.create(:format => "json", :topic => topic, :address => "http://polar-badlands-9376.herokuapp.com/webhooks/#{topic}")
     #  raise "Webhook invalid: #{webhook.errors}" unless webhook.valid?
     end
   end
