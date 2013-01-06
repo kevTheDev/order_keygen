@@ -1,4 +1,4 @@
-class WebHookController < ApplicationController
+class WebhookController < ApplicationController
 
   before_filter :verify_webhook, :except => 'verify_webhook'
 
