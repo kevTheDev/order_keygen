@@ -1,5 +1,22 @@
 class HookController < ApplicationController
   
+  require 'active_resource/connection'
+
+class ActiveResource::Connection
+  def apply_ssl_options_with_ssl_version(http)
+    apply_ssl_options_without_ssl_version(http)
+
+    http.ssl_version = @ssl_options[:ssl_version] if @ssl_options[:ssl_version]
+
+    http
+  end
+
+  alias_method_chain :apply_ssl_options, :ssl_version
+end
+
+ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
+
+
   around_filter :shopify_session, :except => 'welcome'
   
   
@@ -40,11 +57,11 @@ class HookController < ApplicationController
   end
   
   def init_webhooks
-   # topics = ["products/create", "products/update", "products/delete"]
-    webhook = ShopifyAPI::Webhook.create(format: "json", topic: "products/create", address: "http://polar-badlands-9376.herokuapp.com/webhooks/products/create")
-    #topics.each do |topic|
-     # webhook = ShopifyAPI::Webhook.create(:format => "json", :topic => topic, :address => "http://polar-badlands-9376.herokuapp.com/webhooks/#{topic}")
-    #  raise "Webhook invalid: #{webhook.errors}" unless webhook.valid?
+    topics = ["products/create", "products/update", "products/delete"]
+   # webhook = ShopifyAPI::Webhook.create(format: "json", topic: "products/create", address: "http://polar-badlands-9376.herokuapp.com/webhooks/products/create")
+    topics.each do |topic|
+      webhook = ShopifyAPI::Webhook.create(:format => "json", :topic => topic, :address => "http://polar-badlands-9376.herokuapp.com/webhooks/#{topic}")
+    # raise "Webhook invalid: #{webhook.errors}" unless webhook.valid?
     end
   end
   
