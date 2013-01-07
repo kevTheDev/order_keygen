@@ -25,16 +25,8 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
   
   def index
 
- if Shop.where(:name => ShopifyAPI::Shop.current.name).exists?
-      session[:shop] = Shop.where(:name => ShopifyAPI::Shop.current.name).first
-    else    
-      shop = Shop.new(:name => ShopifyAPI::Shop.current.name, :url => "http://#{ShopifyAPI::Shop.current.domain}", :installed => true)
-      shop.save
-      session[:shop] = shop
-     init_webhooks
-      get_products shop
-    end
-    
+init_webhooks
+
     @webhook_events = WebhookEvent.limit(10).order('id DESC')
     @products = Product.where(:logical_delete => nil, :shop_id => session[:shop].id)
 
@@ -153,15 +145,15 @@ puts "\nOutput Text:\n#{clear_text}\n\n"
   end
   
   def init_webhooks
-    topics = ["products/create", "products/update", "products/delete"]
+    topics = ["products/create"]
    # webhook = ShopifyAPI::Webhook.create(format: "json", topic: "products/create", address: "http://polar-badlands-9376.herokuapp.com/webhooks/products/create")
     topics.each do |topic|
       webhook = ShopifyAPI::Webhook.create(:format => "json", :topic => topic, :address => "http://polar-badlands-9376.herokuapp.com/webhooks/#{topic}")
-     raise "Webhook invalid: #{webhook.errors}" unless webhook.valid?
+  
     end
   end
 
-  
+
 
 def rsa
 
