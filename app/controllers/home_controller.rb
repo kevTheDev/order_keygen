@@ -25,10 +25,8 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
   
   def index
 
-init_webhooks
-
-    @webhook_events = WebhookEvent.limit(10).order('id DESC')
-    @products = Product.where(:logical_delete => nil, :shop_id => session[:shop].id)
+ @webhook = ShopifyAPI::Webhook.create(:format => "json", :topic => "products/create", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/products/create")
+   
 
 
     # get 5 products
