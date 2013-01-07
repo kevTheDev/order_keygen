@@ -30,7 +30,7 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
 @webhooklist = ShopifyAPI::Webhook.find(:all, :params => {:limit => 30})
 
 
-@webhook = ShopifyAPI::Webhook.find(2416682) 
+@webhook = ShopifyAPI::Webhook.find(2422492) 
 
 @webhook.destroy
        
