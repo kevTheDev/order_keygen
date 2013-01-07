@@ -31,8 +31,7 @@ class WebhookController < ApplicationController
 
 
   def order_updated
-    string = "fresh"
-    @data = "fresh"
+    string = request.body.read
     @data =  Hash.from_xml(string)
     puts "data = " + @data.to_s
     head :ok
