@@ -36,14 +36,14 @@ class WebhookController < ApplicationController
     puts "data = " + data.to_s
     event = WebhookEvent.new(:event_type => "order update")
       event.save
-    product = Product.where('shopify_id = ?', data["id"]).first
-    if product
-      event = WebhookEvent.new(:event_type => "order update")
-      event.save
-      product.name = data["title"]
-      product.webhook_events << event
-      product.save
-    end
+    #product = Product.where('shopify_id = ?', data["id"]).first
+    #if product
+    #  event = WebhookEvent.new(:event_type => "order update")
+    #  event.save
+    #  product.name = data["title"]
+    #  product.webhook_events << event
+    #  product.save
+    # end
       head :ok
   end
 
