@@ -7,21 +7,12 @@ Licensesync::Application.routes.draw do
   match 'hook/welcome' => 'hook#welcome'
   match 'hook/init_webhooks' => 'hook#init_webhooks'
 
-  #controller :sessions do
-   # get 'login' => :new
-   # post 'login' => :create
-   # get 'auth/shopify/callback' => :show
-   # delete 'logout' => :destroy
-  #end
-
-
-  match 'login'              => 'login#index'
-
-  match 'login/authenticate' => 'login#authenticate'
-
-  match 'login/finalize'     => 'login#finalize'
-
-  match 'login/logout'       => 'login#logout'
+  controller :sessions do
+    get 'login' => :new
+    post 'login' => :create
+    get 'auth/shopify/callback' => :show
+    delete 'logout' => :destroy
+  end
 
     match 'webhooks/products/create' => 'webhook#product_new'
   match 'webhooks/products/update' => 'webhook#product_updated'
