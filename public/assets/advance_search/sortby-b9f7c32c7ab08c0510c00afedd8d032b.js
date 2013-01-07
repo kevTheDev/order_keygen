@@ -1,0 +1,1 @@
+$(function(){var e=$("#advance_search_form");if(e.length===0)return;$("#view_table tr.thead").live("click",function(t){var n=$(t.target).closest(".sortable").attr("data-sortby");return $("#advance_search_sortby").val(n),e.submit(),!1})});

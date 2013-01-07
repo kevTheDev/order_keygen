@@ -1,0 +1,1 @@
+$(function(){$.ajaxSetup({beforeSend:function(e){e.setRequestHeader("Accept","text/javascript")}})});
