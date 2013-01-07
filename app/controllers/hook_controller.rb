@@ -15,12 +15,13 @@ class HookController < ApplicationController
       shop = Shop.new(:name => ShopifyAPI::Shop.current.name, :url => "http://#{ShopifyAPI::Shop.current.domain}", :installed => true)
       shop.save
       session[:shop] = shop
-     init_webhooks
+     #init_webhooks
      # get_products shop
     end
     
     @webhook_events = WebhookEvent.limit(30).order('id ASC')
     @products = Product.where(:logical_delete => nil, :shop_id => session[:shop].id)
+
   end
   
   private
