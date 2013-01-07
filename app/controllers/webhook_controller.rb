@@ -32,9 +32,17 @@ class WebhookController < ApplicationController
 
   def order_updated
     string = request.body.read
-    @data =  Hash.from_xml(string)
-    puts "data = " + @data.to_s
-    head :ok
+    data =  Hash.from_xml(string)
+    puts "data = " + data.to_s
+    product = Product.where('shopify_id = ?', data["id"]).first
+    if product
+      event = WebhookEvent.new(:event_type => "order update")
+      event.save
+      product.name = data["title"]
+      product.webhook_events << event
+      product.save
+    end
+      head :ok
   end
 
 
