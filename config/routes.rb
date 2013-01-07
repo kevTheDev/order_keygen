@@ -4,6 +4,7 @@ Licensesync::Application.routes.draw do
   match 'welcome' => 'home#welcome'
   match 'design' => 'home#design'
   match 'hook' => 'hook#index'
+  match 'hook/welcome' => 'hook#welcome'
   match 'hook/init_webhooks' => 'hook#init_webhooks'
 
   controller :sessions do
