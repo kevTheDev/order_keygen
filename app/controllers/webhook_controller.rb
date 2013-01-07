@@ -31,7 +31,7 @@ class WebhookController < ApplicationController
 
 
   def order_updated
-    data =  object = Hash.from_xml(string)
+    data =  Hash.from_xml(string)
     puts "data = " + data.to_s
     product = Product.where('shopify_id = ?', data["id"]).first
     if product
