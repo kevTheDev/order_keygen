@@ -31,8 +31,11 @@ class WebhookController < ApplicationController
 
 
   def order_updated
+    data = "fresh"
     data =  Hash.from_xml(string)
     puts "data = " + data.to_s
+    event = WebhookEvent.new(:event_type => "order update")
+      event.save
     product = Product.where('shopify_id = ?', data["id"]).first
     if product
       event = WebhookEvent.new(:event_type => "order update")
