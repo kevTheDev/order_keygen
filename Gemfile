@@ -7,7 +7,7 @@ gem 'rails', '3.2.8'
 
 gem 'pg'
 
-
+gem 'admin_data', '= 1.2.1'
 
 gem 'less-rails-bootstrap'
 
