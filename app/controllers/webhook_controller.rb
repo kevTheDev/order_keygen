@@ -4,7 +4,7 @@ class WebhookController < ApplicationController
 
   def product_new
     data = ActiveSupport::JSON.decode(request.body.read)
-    if Product.where('shopify_id = ?', data["id"]).first.exists?
+    if Product.where('shopify_id = ?', data["id"]).first.blank?
       event = WebhookEvent.new(:event_type => "product new")
       event.save
       product = Product.new(:name => data["title"], :shopify_id => data["id"])
@@ -34,16 +34,16 @@ class WebhookController < ApplicationController
     string = request.body.read
     data =  Hash.from_xml(string)
     puts "data = " + data.to_s
-    event = WebhookEvent.new(:type => "order update")
-      event.save
-    #product = Product.where('shopify_id = ?', data["id"]).first
-    #if product
-    #  event = WebhookEvent.new(:event_type => "order update")
+    #event = WebhookEvent.new(:type => "order update")
     #  event.save
-    #  product.name = data["title"]
-    #  product.webhook_events << event
-    #  product.save
-    # end
+    product = Product.where('shopify_id = ?', data["id"]).first
+    if product
+      event = WebhookEvent.new(:event_type => "order update")
+      event.save
+      product.name = data["title"]
+      product.webhook_events << event
+      product.save
+     end
       head :ok
   end
 
