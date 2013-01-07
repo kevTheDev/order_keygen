@@ -49,7 +49,19 @@
         </tr>
       <% end %>
 
-  <% @webhooklist.each do |webhook| %>
+      </table>
+<table>
+<thead>
+          <tr>
+            <th>Topic</th>
+            <th>Created At</th>
+            <th>Address</th>
+            <th>ID</th>
+
+          </tr>
+        </thead>
+
+        <% @webhooklist.each do |webhook| %>
         <tr>
           
           <td><%= webhook.topic %></td>
@@ -57,7 +69,10 @@
          <%= webhook.created_at %>
        </td>
            <td>
-          <%    webhook.address %>
+          <%=   webhook.address %>
+       </td>
+         <td>
+          <%=   webhook.id %>
        </td>
         </tr>
       <% end %>
