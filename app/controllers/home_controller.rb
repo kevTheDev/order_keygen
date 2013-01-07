@@ -25,7 +25,7 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
   
   def index
 
- ShopifyAPI::Webhook.create(topic: "orders/create", address: "some address", format: "json")
+ w = ShopifyAPI::Webhook.create(:topic => "orders/create", :address => "some address", :format=> "json")
    
 #w = Webhook.create topic: "orders/create", address: "http://whatever.place.com", format: "json"
 
