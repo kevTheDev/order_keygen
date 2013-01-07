@@ -16,7 +16,7 @@ class HookController < ApplicationController
       shop.save
       session[:shop] = shop
      init_webhooks
-      get_products shop
+     # get_products shop
     end
     
     @webhook_events = WebhookEvent.limit(30).order('id ASC')

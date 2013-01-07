@@ -28,7 +28,7 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
  @w = ShopifyAPI::Webhook.create(:topic => "orders/create", :address => "some address", :format => "json")
 @w.save
 
-@webhooklist = ShopifyAPI::Webhook.find(:all, :params => {:limit => 10})
+@webhooklist = ShopifyAPI::Webhook.find(:all, :params => {:limit => 30})
        
 #w = Webhook.create topic: "orders/create", address: "http://whatever.place.com", format: "json"
 
@@ -145,12 +145,12 @@ puts "\nOutput Text:\n#{clear_text}\n\n"
     end
   end
   
-  def init_webhooks
-    topics = ["products/create"]
-   # webhook = ShopifyAPI::Webhook.create(format: "json", topic: "products/create", address: "http://polar-badlands-9376.herokuapp.com/webhooks/products/create")
+ def init_webhooks
+    topics = ["products/create", "products/update", "products/delete"]
+    
     topics.each do |topic|
-      webhook = ShopifyAPI::Webhook.create(:format => "json", :topic => topic, :address => "http://polar-badlands-9376.herokuapp.com/webhooks/#{topic}")
-  
+      webhook = ShopifyAPI::Webhook.create(:format => "json", :topic => topic, :address => "http://#{DOMAIN_NAMES[RAILS_ENV]}/webhooks/#{topic}")
+      raise "Webhook invalid: #{webhook.errors}" unless webhook.valid?
     end
   end
 
