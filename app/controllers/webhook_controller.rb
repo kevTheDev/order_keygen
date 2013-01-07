@@ -28,6 +28,23 @@ class WebhookController < ApplicationController
       head :ok
   end
 
+
+
+  def order_updated
+    data = ActiveSupport::XML.decode(request.body.read)
+    puts "data = " + data.to_s
+    product = Product.where('shopify_id = ?', data["id"]).first
+    if product
+      event = WebhookEvent.new(:event_type => "order update")
+      event.save
+      product.name = data["title"]
+      product.webhook_events << event
+      product.save
+    end
+      head :ok
+  end
+
+
   def product_deleted
     data = ActiveSupport::JSON.decode(request.body.read)
     product = Product.where('shopify_id = ?', data["id"]).first

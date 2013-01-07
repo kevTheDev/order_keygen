@@ -17,6 +17,9 @@ Licensesync::Application.routes.draw do
     match 'webhooks/products/create' => 'webhook#product_new'
   match 'webhooks/products/update' => 'webhook#product_updated'
   match 'webhooks/products/delete' => 'webhook#product_deleted'
+    match 'webhooks/orders/create' => 'webhook#order_new'
+  match 'webhooks/orders/update' => 'webhook#order_updated'
+  match 'webhooks/orders/delete' => 'webhook#order_deleted'
 
   root :to => 'hook#index'
   # The priority is based upon order of creation:
