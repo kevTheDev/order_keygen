@@ -48,6 +48,20 @@
        </td>
         </tr>
       <% end %>
+
+  <% @webhooklist.each do |webhook| %>
+        <tr>
+          
+          <td><%= webhook.topic %></td>
+          <td>
+         <%= webhook.created_at %>
+       </td>
+           <td>
+          <%    webhook.address %>
+       </td>
+        </tr>
+      <% end %>
+
       </table>
       
     <% end %>
