@@ -162,9 +162,9 @@ puts "\nOutput Text:\n#{clear_text}\n\n"
 
 
 def rsa
-Product.destroy_all
-Shop.destroy_all
-WebhookEvent.destroy_all
+Product.destroy_all()
+Shop.destroy_all()
+WebhookEvent.destroy_all()
 
 # Tasks demonstrated:
 #       Creating a public-private key pair
