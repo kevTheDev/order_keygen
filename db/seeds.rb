@@ -10,6 +10,4 @@
  # { :name => "Long Sleeve Shirt", :price => 12.00, :created_at => "Long Sleeve Shirt" }
 #])
 
-Shop.create([
-  { :name => "nomadichouse", :installed => true, :created_at => "2012-05-30T11:31:09-04:00", :updated_at => "2012-05-30T11:31:09-04:00", :url => "brekke-funk-and-labadie9721.myshopify.com" }
-])
+Shop.create(:name => "nomadichouse", :installed => true, :url => "brekke-funk-and-labadie9721.myshopify.com")
