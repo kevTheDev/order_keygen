@@ -7,6 +7,8 @@ gem 'rails', '3.2.8'
 
 gem 'pg'
 
+gem 'seed_dumper'
+
 gem 'admin_data', '= 1.2.1'
 
 gem 'less-rails-bootstrap'
