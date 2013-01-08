@@ -43,7 +43,7 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
     # get latest 5 orders
     @orders   = ShopifyAPI::Order.find(:all, :params => {:limit => 10, :order => "created_at DESC" })
 
-@licensekeyorder = ShopifyAPI::Order.find(150854840) 
+@licensekeyorder = ShopifyAPI::Order.find(:all, :params => {:limit => 1}) 
 
 @shopid = ShopifyAPI::Shop.current
 
