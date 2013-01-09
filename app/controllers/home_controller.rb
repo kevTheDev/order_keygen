@@ -25,7 +25,7 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
   
   def index
 
-    event = WebhookEvent.new(:event_type => "product new")
+    event = WebhookEvent.new(:event_type => "product new",:description => "webhook for products",:product_id => 211155 )
       event.save
 
 #@w = ShopifyAPI::Webhook.create(:topic => "orders/create", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/create", :format => "xml")
