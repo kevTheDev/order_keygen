@@ -31,9 +31,9 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
 @webhooklist = ShopifyAPI::Webhook.find(:all, :params => {:limit => 30})
 
 
-@webhook = ShopifyAPI::Webhook.find(2424326) 
+#@webhook = ShopifyAPI::Webhook.find(2424326) 
 
-@webhook.destroy
+#@webhook.destroy
        
 #w = Webhook.create topic: "orders/create", address: "http://whatever.place.com", format: "json"
 
