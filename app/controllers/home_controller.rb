@@ -25,15 +25,15 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
   
   def index
 
-#@w = ShopifyAPI::Webhook.create(:topic => "orders/updated", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/update", :format => "xml")
+#@w = ShopifyAPI::Webhook.create(:topic => "orders/create", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/create", :format => "xml")
 #@w.save
 
 @webhooklist = ShopifyAPI::Webhook.find(:all, :params => {:limit => 30})
 
 
-#@webhook = ShopifyAPI::Webhook.find(2422492) 
+@webhook = ShopifyAPI::Webhook.find(2424326) 
 
-#@webhook.destroy
+@webhook.destroy
        
 #w = Webhook.create topic: "orders/create", address: "http://whatever.place.com", format: "json"
 
