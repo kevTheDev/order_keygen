@@ -4,6 +4,12 @@ class WebhookController < ApplicationController
 
   def product_new
     data = ActiveSupport::JSON.decode(request.body.read)
+
+
+ @products_sync = ShopifyAPI::Product.find(data["id"])
+ @products_sync.tags = "test-webhook"
+@products_sync.save
+
     if Product.where('shopify_id = ?', data["id"]).first.blank?
       event = WebhookEvent.new(:event_type => "product new")
       event.save
