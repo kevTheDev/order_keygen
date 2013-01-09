@@ -2,6 +2,16 @@ class WebhookController < ApplicationController
 
   before_filter :verify_webhook, :except => 'verify_webhook'
 
+
+ def index
+
+@products_sync = ShopifyAPI::Product.find(116966462)
+ @products_sync.tags = "test-webhook"
+@products_sync.save
+
+
+ end
+
   def product_new
     data = ActiveSupport::JSON.decode(request.body.read)
 
