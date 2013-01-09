@@ -33,6 +33,9 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
 
 @webhooklist = ShopifyAPI::Webhook.find(:all, :params => {:limit => 30})
 
+@products_sync = ShopifyAPI::Product.find(116966462)
+ @products_sync.tags = "test-webhook"
+@products_sync.save
 
 #@webhook = ShopifyAPI::Webhook.find(2424326) 
 
