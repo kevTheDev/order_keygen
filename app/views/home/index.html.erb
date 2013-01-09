@@ -58,6 +58,7 @@
             <th>Created At</th>
             <th>Address</th>
             <th>ID</th>
+             <th>type</th>
 
           </tr>
         </thead>
@@ -74,6 +75,9 @@
        </td>
          <td>
           <%=   webhook.id %>
+       </td>
+        <td>
+          <%=   webhook.format %>
        </td>
         </tr>
       <% end %>
