@@ -16,6 +16,7 @@ Licensesync::Application.routes.draw do
   end
 
 match 'webhooks/index' => 'webhook#index'
+match 'webhooks/welcome' => 'webhook#welcome'
     match 'webhooks/products/create' => 'webhook#product_new'
   match 'webhooks/products/update' => 'webhook#product_updated'
   match 'webhooks/products/delete' => 'webhook#product_deleted'
