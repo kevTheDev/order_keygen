@@ -28,18 +28,18 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
     #event = WebhookEvent.new(:event_type => "product new",:description => "webhook for products",:product_id => 211155 )
      # event.save
 
-@w = ShopifyAPI::Webhook.create(:topic => "orders/create", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/create", :format => "xml")
-@w.save
-@u = ShopifyAPI::Webhook.create(:topic => "orders/updated", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/update", :format => "xml")
-@u.save
-@f = ShopifyAPI::Webhook.create(:topic => "orders/fufilled", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/paid", :format => "xml")
-@f.save
-@paid = ShopifyAPI::Webhook.create(:topic => "orders/paid", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/fufilled", :format => "xml")
-@paid.save
-@p = ShopifyAPI::Webhook.create(:topic => "products/create", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/products/create", :format => "json")
-@p.save
-@p = ShopifyAPI::Webhook.create(:topic => "products/update", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/products/update", :format => "json")
-@p.save
+#@w = ShopifyAPI::Webhook.create(:topic => "orders/create", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/create", :format => "xml")
+#@w.save
+#@u = ShopifyAPI::Webhook.create(:topic => "orders/updated", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/update", :format => "xml")
+#@u.save
+#@f = ShopifyAPI::Webhook.create(:topic => "orders/fufilled", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/paid", :format => "xml")
+#@f.save
+#@paid = ShopifyAPI::Webhook.create(:topic => "orders/paid", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/fufilled", :format => "xml")
+#@paid.save
+#@p = ShopifyAPI::Webhook.create(:topic => "products/create", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/products/create", :format => "json")
+#@p.save
+#@p = ShopifyAPI::Webhook.create(:topic => "products/update", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/products/update", :format => "json")
+#@p.save
 
 @webhooklist = ShopifyAPI::Webhook.find(:all, :params => {:limit => 30})
 
