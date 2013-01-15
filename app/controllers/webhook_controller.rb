@@ -21,7 +21,7 @@ end
 
   def product_new
     data = ActiveSupport::JSON.decode(request.body.read)
-logger.debug("Decoded: #{data}")
+puts "Decoded: #{data}"
 
  #@products_sync = ShopifyAPI::Product.find(data["id"])
  #@products_sync.tags = "test-webhook"
