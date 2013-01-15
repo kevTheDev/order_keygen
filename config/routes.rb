@@ -1,7 +1,6 @@
 Licensesync::Application.routes.draw do
     resources :products
   match 'home/index' => 'home#index'
-  match 'home/rsa' => 'home#rsa'  
   match 'welcome' => 'home#welcome'
   match 'design' => 'home#design'
   match 'hook' => 'hook#index'
