@@ -91,6 +91,7 @@ puts "Decoded: #{data}"
   
   def verify_webhook
     data = request.body.read.to_s
+    puts "Decoded from verify: #{data}"
     hmac_header = request.headers['HTTP_X_SHOPIFY_HMAC_SHA256']
     digest  = OpenSSL::Digest::Digest.new('sha256')
     calculated_hmac = Base64.encode64(OpenSSL::HMAC.digest(digest, Licensesync::Application.config.shopify.secret, data)).strip
