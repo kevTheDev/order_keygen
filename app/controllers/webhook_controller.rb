@@ -5,7 +5,7 @@ require 'openssl'
 
 #around_filter :shopify_session, :except => 'welcome'
 before_filter :verify_webhook, :except => 'verify_webhook'
-@SHARED_SECRET = '5ff673736415fce868a3c0df89cbfd51'
+
 
  def welcome
     current_host = "#{request.host}#{':' + request.port.to_s if request.port != 80}"
@@ -100,7 +100,7 @@ puts "Decoded: #{data}"
     hmac_header = request.headers['HTTP_X_SHOPIFY_HMAC_SHA256']
       puts "Header: #{hmac_header} \n"
     digest  = OpenSSL::Digest::Digest.new('sha256')
-
+@SHARED_SECRET = '5ff673736415fce868a3c0df89cbfd51'
     puts "Digest: #{digest} \n"
     calculated_hmac = Base64.encode64(OpenSSL::HMAC.digest(digest, @SHARED_SECRET, data)).strip
       puts "Calc Header: #{calculated_hmac} \n"
