@@ -1,7 +1,7 @@
 class WebhookController < ApplicationController
 
 
-around_filter :shopify_session, :except => 'welcome'
+#around_filter :shopify_session, :except => 'welcome'
 before_filter :verify_webhook, :except => 'verify_webhook'
 @SHARED_SECRET = '5ff673736415fce868a3c0df89cbfd51'
 
@@ -61,14 +61,14 @@ puts "Decoded: #{data}"
     puts "data = " + data.to_s
     event = WebhookEvent.new(:event_type => "order update")
      event.save
-    product = Product.where('shopify_id = ?', data["id"]).first
-    if product
+   # product = Product.where('shopify_id = ?', data["id"]).first
+   # if product
      # event = WebhookEvent.new(:event_type => "order update")
       #event.save
       #product.name = data["title"]
       #product.webhook_events << event
       #product.save
-    end
+   # end
       head :ok
   end
 
