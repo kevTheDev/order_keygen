@@ -68,7 +68,7 @@ puts "Decoded: #{data}"
       #product.name = data["title"]
       #product.webhook_events << event
       #product.save
-    # end
+    end
       head :ok
   end
 
