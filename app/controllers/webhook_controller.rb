@@ -2,7 +2,7 @@ class WebhookController < ApplicationController
 
 
 around_filter :shopify_session, :except => 'welcome'
-#before_filter :verify_webhook, :except => 'verify_webhook'
+before_filter :verify_webhook, :except => 'verify_webhook'
 @SHARED_SECRET = '5ff673736415fce868a3c0df89cbfd51'
 
  def welcome
@@ -13,7 +13,7 @@ end
 
  def index
 
-@products_sync = ShopifyAPI::Product.find(117661124)
+@products_sync = ShopifyAPI::Product.find(116966462)
  @products_sync.tags = "test-webhook"
 @products_sync.save
 
@@ -56,12 +56,13 @@ puts "Decoded: #{data}"
 
   def order_updated
     string = request.body.read
+    puts "string = " + string
     data =  Hash.from_xml(string)
     puts "data = " + data.to_s
     event = WebhookEvent.new(:event_type => "order update")
-    event.save
-    #product = Product.where('shopify_id = ?', data["id"]).first
-    #if product
+     event.save
+    product = Product.where('shopify_id = ?', data["id"]).first
+    if product
      # event = WebhookEvent.new(:event_type => "order update")
       #event.save
       #product.name = data["title"]
@@ -87,8 +88,25 @@ puts "Decoded: #{data}"
     end
     head :ok
   end
- 
+  
+  private
+  
+  def verify_webhook
+    puts "Hello test"
+    data = request.body.read.to_s
+    puts "Decoded from verify: #{data} \n" 
+    hmac_header = request.headers['HTTP_X_SHOPIFY_HMAC_SHA256']
+      puts "Header: #{hmac_header} \n"
+    digest  = OpenSSL::Digest::Digest.new('sha256')
 
+    puts "Digest: #{digest} \n"
+    calculated_hmac = Base64.encode64(OpenSSL::HMAC.digest(digest, @SHARED_SECRET, data)).strip
+      puts "Calc Header: #{calculated_hmac} \n"
+    unless calculated_hmac == hmac_header
+      head :unauthorized
+    end
+    request.body.rewind
+  end
 
 end
 
