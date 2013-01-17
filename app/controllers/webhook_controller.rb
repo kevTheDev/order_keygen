@@ -94,10 +94,12 @@ puts "Decoded: #{data}"
     puts "Decoded from verify: #{data} \n"
 
     hmac_header = request.headers['HTTP_X_SHOPIFY_HMAC_SHA256']
+      puts "Header: #{hmac_header} \n"
     digest  = OpenSSL::Digest::Digest.new('sha256')
 
     puts "Digest: #{digest} \n"
     calculated_hmac = Base64.encode64(OpenSSL::HMAC.digest(digest, Licensesync::Application.config.shopify.secret, data)).strip
+      puts "Calc Header: #{calculated_hmac} \n"
     unless calculated_hmac == hmac_header
       head :unauthorized
     end
