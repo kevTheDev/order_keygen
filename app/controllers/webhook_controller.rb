@@ -58,7 +58,7 @@ puts "Decoded: #{data}"
     string = request.body.read
     data =  Hash.from_xml(string)
     puts "data = " + data.to_s
-    event = WebhookEvent.new(:type => "order update")
+    event = WebhookEvent.new(:event_type => "order update")
     event.save
     #product = Product.where('shopify_id = ?', data["id"]).first
     #if product
