@@ -55,6 +55,23 @@ puts "Decoded: #{data}"
   end
 
 
+ def order_new
+    string = request.body.read
+    puts "string = " + string
+    data =  Hash.from_xml(string)
+    puts "data = " + data.to_s
+    event = WebhookEvent.new(:event_type => "order new")
+     event.save
+  
+   @products_sync = ShopifyAPI::Product.find(data["id"])
+ @products_sync.tags = "test-webhook"
+@products_sync.save
+
+
+      head :ok
+  end
+
+
 
   def order_updated
     string = request.body.read
