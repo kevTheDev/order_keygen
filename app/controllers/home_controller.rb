@@ -16,7 +16,7 @@ end
 
 ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
   
-  around_filter :shopify_session, :except => 'welcome'
+ # around_filter :shopify_session, :except => 'welcome'
   
   def welcome
     current_host = "#{request.host}#{':' + request.port.to_s if request.port != 80}"
