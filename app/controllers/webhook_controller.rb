@@ -63,9 +63,9 @@ puts "Decoded: #{data}"
     event = WebhookEvent.new(:event_type => "order new")
      event.save
   
-   @products_sync = ShopifyAPI::Product.find(data["id"])
- @products_sync.tags = "test-webhook"
-@products_sync.save
+   @order_sync = ShopifyAPI::Order.find(data["id"])
+ @order_sync.note = "test-webhook"
+@order_sync.save
 
 
       head :ok
