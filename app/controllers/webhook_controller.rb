@@ -91,6 +91,24 @@ puts "Decoded: #{data}"
       head :ok
   end
 
+  def order_paid
+    string = request.body.read
+    puts "string = " + string
+    data =  Hash.from_xml(string)
+    puts "data = " + data.to_s
+    event = WebhookEvent.new(:event_type => "order paid")
+     event.save
+   # product = Product.where('shopify_id = ?', data["id"]).first
+   # if product
+     # event = WebhookEvent.new(:event_type => "order update")
+      #event.save
+      #product.name = data["title"]
+      #product.webhook_events << event
+      #product.save
+   # end
+      head :ok
+  end
+
 
   def product_deleted
     data = ActiveSupport::JSON.decode(request.body.read)

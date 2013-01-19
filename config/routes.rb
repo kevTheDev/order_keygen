@@ -21,7 +21,7 @@ match 'webhooks/welcome' => 'webhook#welcome'
   match 'webhooks/products/delete' => 'webhook#product_deleted'
     match 'webhooks/orders/create' => 'webhook#order_new'
   match 'webhooks/orders/update' => 'webhook#order_updated'
-  match 'webhooks/orders/delete' => 'webhook#order_deleted'
+  match 'webhooks/orders/fufilled' => 'webhook#order_paid'
 
   root :to => 'hook#index'
   # The priority is based upon order of creation:
