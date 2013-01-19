@@ -3,7 +3,7 @@ class WebhookController < ApplicationController
 require 'base64'
 require 'openssl'
 
-#around_filter :shopify_session, :except => 'welcome'
+around_filter :shopify_session, :except => 'verify_webhook'
 before_filter :verify_webhook, :except => 'verify_webhook'
 
 
