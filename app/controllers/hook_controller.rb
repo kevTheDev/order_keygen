@@ -11,12 +11,12 @@ class HookController < ApplicationController
   def index
     if Shop.where(:name => ShopifyAPI::Shop.current.name).exists?
       session[:shop] = Shop.where(:name => ShopifyAPI::Shop.current.name).first
-      shopid = session[:shop].id 
+      shopid = session[:shop].name 
     else    
       shop = Shop.new(:name => ShopifyAPI::Shop.current.name, :url => "http://#{ShopifyAPI::Shop.current.domain}", :installed => true)
       shop.save
       session[:shop] = shop
-      shopid = session[:shop].id 
+      shopid = session[:shop].name
      #init_webhooks
      get_products shop
     end
