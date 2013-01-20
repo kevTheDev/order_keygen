@@ -3,23 +3,7 @@ class WebhookController < ApplicationController
 require 'base64'
 require 'openssl'
 
-  require 'active_resource/connection'
-
-class ActiveResource::Connection
-  def apply_ssl_options_with_ssl_version(http)
-    apply_ssl_options_without_ssl_version(http)
-
-    http.ssl_version = @ssl_options[:ssl_version] if @ssl_options[:ssl_version]
-
-    http
-  end
-
-  alias_method_chain :apply_ssl_options, :ssl_version
-end
-
-ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
-  
- around_filter :shopify_session, :except => 'welcome'
+before_filter :shopify_session
 before_filter :verify_webhook, :except => 'verify_webhook'
 
 
