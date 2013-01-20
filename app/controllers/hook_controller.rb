@@ -12,7 +12,7 @@ class HookController < ApplicationController
     if Shop.where(:name => ShopifyAPI::Shop.current.name).exists?
       session[:shop] = Shop.where(:name => ShopifyAPI::Shop.current.name).first
       shopid = session[:shop].name 
-      get_products shop
+      
     else    
       shop = Shop.new(:name => ShopifyAPI::Shop.current.name, :url => "http://#{ShopifyAPI::Shop.current.domain}", :installed => true)
       shop.save

@@ -80,6 +80,16 @@ puts "Decoded: #{data}"
     puts "data = " + data.to_s
     event = WebhookEvent.new(:event_type => "order update")
      event.save
+
+       if Shop.where(:name => ShopifyAPI::Shop.current.name).exists?
+      session[:shop] = Shop.where(:name => ShopifyAPI::Shop.current.name).first
+      shopid = session[:shop].name 
+       else
+        shopid = "test"
+
+    end
+
+    puts  "Name of Shop: #{shopid}"
    # product = Product.where('shopify_id = ?', data["id"]).first
    # if product
      # event = WebhookEvent.new(:event_type => "order update")
