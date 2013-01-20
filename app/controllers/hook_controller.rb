@@ -16,7 +16,7 @@ class HookController < ApplicationController
       shop = Shop.new(:name => ShopifyAPI::Shop.current.name, :url => "http://#{ShopifyAPI::Shop.current.domain}", :installed => true)
       shop.save
       session[:shop] = shop
-      shopid = session[:shop].name
+      shopid = "test"
      #init_webhooks
      get_products shop
     end
