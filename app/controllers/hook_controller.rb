@@ -19,6 +19,7 @@ class HookController < ApplicationController
      get_products shop
     end
     
+    puts  "Name of Shop: #{shop}"
     @webhook_events = WebhookEvent.limit(30).order('id ASC')
     @products = Product.where(:logical_delete => nil, :shop_id => session[:shop].id)
 
