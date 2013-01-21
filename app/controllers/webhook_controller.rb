@@ -3,7 +3,7 @@ class WebhookController < ApplicationController
 require 'base64'
 require 'openssl'
 
-before_filter :shopify_session
+before_filter :shopify_session, :except=>[:new, :create]
 before_filter :verify_webhook, :except => 'verify_webhook'
 
 
@@ -15,10 +15,14 @@ end
 
  def index
 
-@products_sync = ShopifyAPI::Product.find(116966462)
- @products_sync.tags = "test-webhook"
-@products_sync.save
+#@products_sync = ShopifyAPI::Product.find(116966462)
+# @products_sync.tags = "test-webhook"
+#@products_sync.save
 
+session[:shop] = Shop.where(:name => ShopifyAPI::Shop.current.name).first
+      
+      shopid = session[:shop].name 
+puts  "Name of Shop: #{shopid}"
 
  end
 
