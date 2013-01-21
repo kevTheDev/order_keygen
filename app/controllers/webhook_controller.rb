@@ -3,7 +3,7 @@ class WebhookController < ApplicationController
 require 'base64'
 require 'openssl'
 
-#ActiveResource::Base.site = "http://magdi.myshopify.com"
+ActiveResource::Base.site = "http://magdi.myshopify.com"
 
 #skip_around_filter :shopify_session
 #around_filter :shopify_session
