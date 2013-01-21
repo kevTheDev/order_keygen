@@ -3,7 +3,9 @@ class WebhookController < ApplicationController
 require 'base64'
 require 'openssl'
 
-skip_around_filter :shopify_session
+#ActiveResource::Base.site = "http://magdi.myshopify.com"
+
+#skip_around_filter :shopify_session
 #around_filter :shopify_session
 before_filter :verify_webhook, :except =>[:verify_webhook, :index]
 
