@@ -4,7 +4,7 @@ require 'base64'
 require 'openssl'
 
 before_filter :shopify_session
-before_filter :verify_webhook, :except => 'verify_webhook'
+before_filter :verify_webhook, :except =>[:verify_webhook, :index]
 
 
  def welcome
