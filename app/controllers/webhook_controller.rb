@@ -19,10 +19,10 @@ end
 # @products_sync.tags = "test-webhook"
 #@products_sync.save
 
-session[:shop] = Shop.where(:name => ShopifyAPI::Shop.current.name).first
+#session[:shop] = Shop.where(:name => ShopifyAPI::Shop.current.name).first
       
-      shopid = session[:shop].name 
-puts  "Name of Shop: #{shopid}"
+ #     shopid = session[:shop].name 
+#puts  "Name of Shop: #{shopid}"
 
  end
 
