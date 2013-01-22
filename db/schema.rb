@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -15,8 +16,8 @@ ActiveRecord::Schema.define(:version => 20110526204707) do
   create_table "products", :force => true do |t|
     t.string   "name"
     t.string   "price"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "shopify_id"
     t.boolean  "logical_delete"
     t.integer  "shop_id"
@@ -25,14 +26,14 @@ ActiveRecord::Schema.define(:version => 20110526204707) do
   create_table "shops", :force => true do |t|
     t.string   "name"
     t.boolean  "installed"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
     t.text     "url"
   end
 
   create_table "webhook_events", :force => true do |t|
     t.string   "event_type"
-    t.text     "description",    :limit => 255
+    t.text     "description"
     t.integer  "product_id"
     t.boolean  "logical_delete"
     t.datetime "created_at"

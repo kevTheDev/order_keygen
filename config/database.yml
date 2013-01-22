@@ -4,15 +4,13 @@
 development:
   adapter: postgresql
   encoding: unicode
-  database: d5tjhtg05li0mf
+  database: shop_development
   pool: 5
-  username: sbupfgrifhrwvd
-  password:  fJq2D22vrG1KCrGI7vcFzhzKhx
+  username: root
 
 test:
   adapter: postgresql
   encoding: unicode
-  database: d5tjhtg05li0mf
+  database: shop_test
   pool: 5
-  username: sbupfgrifhrwvd
-  password:  fJq2D22vrG1KCrGI7vcFzhzKhx
+  username: root
