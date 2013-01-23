@@ -11,4 +11,4 @@
 #])
 
 shop = Shop.create(:name => "nomadichouse", :installed => true, :url => "brekke-funk-and-labadie9721.myshopify.com")
-shop.confirm!
+#shop.confirm!
