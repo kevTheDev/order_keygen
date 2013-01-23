@@ -1,0 +1,1 @@
+ActiveResource::Base.site = "http://magdi.myshopify.com"
