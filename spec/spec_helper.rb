@@ -9,8 +9,6 @@ require 'rspec/autorun'
 # in spec/support/ and its subdirectories.
 Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 
-include Authlogic::TestCase
-
 RSpec.configure do |config|
   
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -34,7 +32,4 @@ RSpec.configure do |config|
   
   config.render_views
   
-  config.before(:each) do
-    ActiveRecord::Observer.disable_observers
-  end
 end

@@ -14,14 +14,12 @@ Licensesync::Application.routes.draw do
     delete 'logout' => :destroy
   end
 
-match 'webhooks/index' => 'webhook#index'
-match 'webhooks/welcome' => 'webhook#welcome'
-    match 'webhooks/products/create' => 'webhook#product_new'
-  match 'webhooks/products/update' => 'webhook#product_updated'
-  match 'webhooks/products/delete' => 'webhook#product_deleted'
-    match 'webhooks/orders/create' => 'webhook#order_new'
-  match 'webhooks/orders/update' => 'webhook#order_updated'
-  match 'webhooks/orders/fufilled' => 'webhook#order_paid'
+  get 'webhooks/index' => 'webhook#index'
+  get 'webhooks/welcome' => 'webhook#welcome'
+  
+  post 'webhooks/orders/create' => 'webhook#order_new'
+  post 'webhooks/orders/update' => 'webhook#order_updated'
+  post 'webhooks/orders/paid' => 'webhook#order_paid'
 
   root :to => 'hook#index'
   # The priority is based upon order of creation:
