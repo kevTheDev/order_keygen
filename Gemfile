@@ -27,4 +27,6 @@ end
 
 group :test do
   gem "rspec-rails", "~> 2.12.2"
+  gem "factory_girl_rails", "~> 4.1.0", :require => false
+  gem "shoulda-matchers", "~> 1.2.0"
 end
