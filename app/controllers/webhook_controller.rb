@@ -1,19 +1,18 @@
+require 'base64'
+
+
 class WebhookController < ApplicationController
 
-require 'base64'
-require 'openssl'
-
-ActiveResource::Base.site = "http://magdi.myshopify.com"
 
 #skip_around_filter :shopify_session
 #around_filter :shopify_session
 before_filter :verify_webhook, :except =>[:verify_webhook, :index]
 
 
- def welcome
+  def welcome
     current_host = "#{request.host}#{':' + request.port.to_s if request.port != 80}"
     @callback_url = "http://#{current_host}/login"
-end
+  end
 
 
  def index
@@ -31,7 +30,7 @@ end
 
   def product_new
     data = ActiveSupport::JSON.decode(request.body.read)
-puts "Decoded: #{data}"
+    puts "Decoded: #{data}"
 
     if Product.where('shopify_id = ?', data["id"]).first.blank?
       event = WebhookEvent.new(:event_type => "product new")
@@ -40,17 +39,19 @@ puts "Decoded: #{data}"
       product.webhook_events << event
       product.save
 
-       @products_sync = ShopifyAPI::Product.find(data["id"])
- @products_sync.tags = "test-webhook"
-@products_sync.save
+      @products_sync = ShopifyAPI::Product.find(data["id"])
+      @products_sync.tags = "test-webhook"
+      @products_sync.save
     end
-      head :ok
+    
+    head :ok
   end
 
   def product_updated
     data = ActiveSupport::JSON.decode(request.body.read)
     puts "data = " + data.to_s
     product = Product.where('shopify_id = ?', data["id"]).first
+    
     if product
       event = WebhookEvent.new(:event_type => "product update")
       event.save
@@ -58,7 +59,7 @@ puts "Decoded: #{data}"
       product.webhook_events << event
       product.save
     end
-      head :ok
+    head :ok
   end
 
 
@@ -68,14 +69,12 @@ puts "Decoded: #{data}"
     data =  Hash.from_xml(string)
     puts "data = " + data.to_s
     event = WebhookEvent.new(:event_type => "order new")
-     event.save
+    event.save
   
-   @order_sync = ShopifyAPI::Order.find(data["id"])
- @order_sync.note = "test-webhook"
-@order_sync.save
-
-
-      head :ok
+    @order_sync = ShopifyAPI::Order.find(data["id"])
+    @order_sync.note = "test-webhook"
+    @order_sync.save
+    head :ok
   end
 
 

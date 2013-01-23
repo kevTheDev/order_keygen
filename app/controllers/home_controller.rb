@@ -24,125 +24,89 @@ ShopifyAPI::Base.ssl_options = {:ssl_version => :TLSv1}
   end
   
   def index
-
-    #event = WebhookEvent.new(:event_type => "product new",:description => "webhook for products",:product_id => 211155 )
-     # event.save
-
-#@w = ShopifyAPI::Webhook.create(:topic => "orders/create", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/create", :format => "xml")
-#@w.save
-#@u = ShopifyAPI::Webhook.create(:topic => "orders/updated", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/update", :format => "xml")
-#@u.save
-#@f = ShopifyAPI::Webhook.create(:topic => "orders/fufilled", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/paid", :format => "xml")
-#@f.save
-#@paid = ShopifyAPI::Webhook.create(:topic => "orders/paid", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/orders/fufilled", :format => "xml")
-#@paid.save
-#@p = ShopifyAPI::Webhook.create(:topic => "products/create", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/products/create", :format => "json")
-#@p.save
-#@p = ShopifyAPI::Webhook.create(:topic => "products/update", :address => "http://polar-badlands-9376.herokuapp.com/webhooks/products/update", :format => "json")
-#@p.save
-
-@webhooklist = ShopifyAPI::Webhook.find(:all, :params => {:limit => 30})
-
-#@products_sync = ShopifyAPI::Product.find(116966462)
- #@products_sync.tags = "test-webhook"
-#@products_sync.save
-
-#@webhook = ShopifyAPI::Webhook.find(2424326) 
-
-#@webhook.destroy
-       
-#w = Webhook.create topic: "orders/create", address: "http://whatever.place.com", format: "json"
-
+    @webhooklist = ShopifyAPI::Webhook.find(:all, :params => {:limit => 30})
     # get 5 products
     @productsnh = ShopifyAPI::Product.find(:all, :params => {:limit => 10})
-
     # get latest 5 orders
     @orders   = ShopifyAPI::Order.find(:all, :params => {:limit => 10, :order => "created_at DESC" })
 
-@licensekeyorder = ShopifyAPI::Order.find(151622158) 
-#150854840  154045834
-@shopid = ShopifyAPI::Shop.current
+    @licensekeyorder = ShopifyAPI::Order.find(151622158) 
+    #150854840  154045834
+    @shopid = ShopifyAPI::Shop.current
 
 
-require 'openssl'
+    # in a real rsa implementation, message would be the symmetric key
+    # used to encrypt the real message data
+    # which would be 'yourpass' in snippet http://www.bigbold.com/snippets/posts/show/576
 
-# in a real rsa implementation, message would be the symmetric key
-# used to encrypt the real message data
-# which would be 'yourpass' in snippet http://www.bigbold.com/snippets/posts/show/576
+    secret = @licensekeyorder.billing_address.name + @licensekeyorder.email + @licensekeyorder.created_at
 
-secret = @licensekeyorder.billing_address.name + @licensekeyorder.email + @licensekeyorder.created_at
-
-require 'digest/sha1'
-require "base64"
-
-
-
-base64key = Digest::SHA1.digest("secret")
-@secret = secret
+    require 'digest/sha1'
+    require "base64"
 
 
 
+    base64key = Digest::SHA1.digest("secret")
+    @secret = secret
 
-message = secret
-puts "\nOriginal Message: #{secret}\n"
-puts "Using SHA1 Digest\n"
+    message = secret
+    puts "\nOriginal Message: #{secret}\n"
+    puts "Using SHA1 Digest\n"
 
-puts "Using ruby-openssl to generate the public and private keys\n"
+    puts "Using ruby-openssl to generate the public and private keys\n"
 
-# .generate creates an object containing both keys
-new_key = OpenSSL::PKey::RSA.generate( 1024 )
-puts "Does the generated key object have the public key? #{new_key.public?}\n"
-puts "Does the generated key object have the private key? #{new_key.private?}\n\n"
+    # .generate creates an object containing both keys
+    new_key = OpenSSL::PKey::RSA.generate( 1024 )
+    puts "Does the generated key object have the public key? #{new_key.public?}\n"
+    puts "Does the generated key object have the private key? #{new_key.private?}\n\n"
 
-# write the new keys as PEM's
-new_public = new_key.public_key
-puts "New public key pem:\n#{new_public}\n"
-puts "The new public key in human readable form:\n"
-puts new_public.to_text + "\n"
+    # write the new keys as PEM's
+    new_public = new_key.public_key
+    puts "New public key pem:\n#{new_public}\n"
+    puts "The new public key in human readable form:\n"
+    puts new_public.to_text + "\n"
 
-output_public = File.new("./new_public.pem", "w")
-output_public.puts new_public
-output_public.close
+    output_public = File.new("./new_public.pem", "w")
+    output_public.puts new_public
+    output_public.close
 
-new_private = new_key.to_pem
-puts "new private key pem:\n#{new_private}\n"
+    new_private = new_key.to_pem
+    puts "new private key pem:\n#{new_private}\n"
 
-output_private = File.new("./new_private.pem", "w")
-output_private.puts new_private
-output_private.close
+    output_private = File.new("./new_private.pem", "w")
+    output_private.puts new_private
+    output_private.close
 
-puts "\nEncrypt/decrypt using previously saved pem files on disk...\n"
-# we encrypt with the public key
-# note: of course the public key PEM contains only the public key
-puts "Reading Public Key PEM...\n"
-public_key = OpenSSL::PKey::RSA.new(File.read("./new_public.pem"))
-puts "Does the public pem file have the public key? #{public_key.public?}\n"
-puts "Does the public pem file have the private key? #{public_key.private?}\n"
-puts "\nEncrypting with public key ...\n"
+    puts "\nEncrypt/decrypt using previously saved pem files on disk...\n"
+    # we encrypt with the public key
+    # note: of course the public key PEM contains only the public key
+    puts "Reading Public Key PEM...\n"
+    public_key = OpenSSL::PKey::RSA.new(File.read("./new_public.pem"))
+    puts "Does the public pem file have the public key? #{public_key.public?}\n"
+    puts "Does the public pem file have the private key? #{public_key.private?}\n"
+    puts "\nEncrypting with public key ...\n"
 
-cipher_text = Base64.encode64(public_key.public_encrypt( message ))
-puts "License Key:\n#{cipher_text}\n"
+    cipher_text = Base64.encode64(public_key.public_encrypt( message ))
+    puts "License Key:\n#{cipher_text}\n"
 
-# get the private key from pem file and decrypt
-# note the private key PEM contains both keys
-puts "\nReading Private Key PEM...\n"
-private_key = OpenSSL::PKey::RSA.new(File.read("./new_private.pem"))
-puts "Does the private pem file have the public key? #{private_key.public?}\n"
-puts "Does the private pem file have the private key? #{private_key.private?}\n"
-puts "\nDecrypting with private key ...\n"
-clear_text = private_key.private_decrypt(Base64.decode64(cipher_text) )
+    # get the private key from pem file and decrypt
+    # note the private key PEM contains both keys
+    puts "\nReading Private Key PEM...\n"
+    private_key = OpenSSL::PKey::RSA.new(File.read("./new_private.pem"))
+    puts "Does the private pem file have the public key? #{private_key.public?}\n"
+    puts "Does the private pem file have the private key? #{private_key.private?}\n"
+    puts "\nDecrypting with private key ...\n"
+    clear_text = private_key.private_decrypt(Base64.decode64(cipher_text) )
 
-puts "\nOutput Text:\n#{clear_text}\n\n"
+    puts "\nOutput Text:\n#{clear_text}\n\n"
 
-@pubkey = public_key
-@privkey = private_key
-@cipher = cipher_text
-@clrtext = clear_text
+    @pubkey = public_key
+    @privkey = private_key
+    @cipher = cipher_text
+    @clrtext = clear_text
 
-@licensekeyorder.note = cipher_text
-@licensekeyorder.save
-
-
+    @licensekeyorder.note = cipher_text
+    @licensekeyorder.save
   end
 
  private
