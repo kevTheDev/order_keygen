@@ -4,4 +4,8 @@ class Order < ActiveRecord::Base
   
   attr_accessible :shopify_id
   
+  def self.for_shopify_id(shopify_id)
+    where(shopify_id: shopify_id)
+  end
+  
 end
