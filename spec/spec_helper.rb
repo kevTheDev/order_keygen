@@ -34,4 +34,7 @@ RSpec.configure do |config|
   
   config.render_views
   
+  config.before(:each) do
+    ActiveRecord::Observer.disable_observers
+  end
 end
