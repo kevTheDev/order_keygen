@@ -25,6 +25,9 @@ class LoginController < ApplicationController
     shopify_session = ShopifyAPI::Session.new(params[:shop], params[:t], params)
     if shopify_session.valid?
       session[:shopify] = shopify_session
+      Shop.find_or_create_by_myshopify_domain(shopify_session.url, access_token: shopify_session.token)
+      
+      
       flash[:notice] = "Logged in to shopify store."
       
       redirect_to return_address

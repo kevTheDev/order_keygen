@@ -14,6 +14,8 @@ class Order < ActiveRecord::Base
   end
   
   def generate_licence_key
+    shopify_session = shopify_session
+    
     shopify_order = ShopifyAPI::Order.find(self.shopify_id)
     cipher_text   = Order.generate_cipher_for_shopify_order(shopify_order)
     
@@ -22,6 +24,10 @@ class Order < ActiveRecord::Base
     
     shopify_order.note = cipher_text
     shopify_order.save
+  end
+  
+  def shopify_session
+    ShopifyAPI::Session.setup({:api_key => Licensesync::Application.config.shopify.api_key, :secret => Licensesync::Application.config.shopify.secret})
   end
   
   def self.generate_cipher_for_shopify_order(shopify_order)

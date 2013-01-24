@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130124112457) do
+ActiveRecord::Schema.define(:version => 20130124140300) do
 
   create_table "orders", :force => true do |t|
     t.string   "shopify_id",  :null => false
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(:version => 20130124112457) do
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
     t.text     "url"
+    t.string   "domain"
+    t.text     "token"
   end
 
   create_table "webhook_events", :force => true do |t|
