@@ -48,9 +48,8 @@ class WebhookController < ApplicationController
     hmac_header = request.headers['HTTP_X_SHOPIFY_HMAC_SHA256']
     puts "Header: #{hmac_header} \n"
     digest  = OpenSSL::Digest::Digest.new('sha256')
-    @SHARED_SECRET = '5ff673736415fce868a3c0df89cbfd51'
     puts "Digest: #{digest} \n"
-    calculated_hmac = Base64.encode64(OpenSSL::HMAC.digest(digest, @SHARED_SECRET, data)).strip
+    calculated_hmac = Base64.encode64(OpenSSL::HMAC.digest(digest, Licensesync::Application.config.shopify.secret, data)).strip
     puts "Calc Header: #{calculated_hmac} \n"
     
     unless calculated_hmac == hmac_header
