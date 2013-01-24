@@ -19,4 +19,12 @@ describe Order do
   end
   # Creation
   
+  describe 'generate_licence_key' do
+    
+    
+    
+    
+  end
+  # generate_licence_key
+  
 end
